@@ -435,8 +435,8 @@ function decodeData(hex) {
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
 		//console.dir(what);
-		var code = what.code & 0x00ffff00;
-		var cls = what.code & 0xff;
+		var code = code & 0x00ffff00;
+		var cls = code & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
 		adapter.log.debug("cmd : " + cmd);
