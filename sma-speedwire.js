@@ -449,8 +449,8 @@ function decodeData(hex) {
 				// 	.word32lu('devClass')
 				// 	.vars
 				// 	;
-				devClass = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
-				var type = tmp.devClass & 0x00FFFFFF;
+				var devClass = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+				var type = devClass & 0x00FFFFFF;
 				adapter.log.debug("type : "+type);
 				pointer += 64;
 		} else if (cmd === "821F00") { // Device class
