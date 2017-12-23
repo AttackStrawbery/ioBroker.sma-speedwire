@@ -430,9 +430,9 @@ function decodeData(hex) {
 		// .word32bu('timestamp')
 		// .vars
 		// ;
-		code = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+		var code = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
 		pointer += 8;
-		timestamp = get32Bit(hex.substr(pointer,8));
+		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
 		//console.dir(what);
 		var code = what.code & 0x00ffff00;
