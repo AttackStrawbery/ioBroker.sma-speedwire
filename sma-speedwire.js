@@ -153,7 +153,6 @@ var callBackCount = 0;
 var waitCount = 0;
 var maxWaitCount = 10;
 var dgram = require('dgram');
-//var binary = require('binary');
 var pktId = 480;
 
 // Configure this using the admin interface
@@ -398,38 +397,9 @@ function decodeData(hex) {
   var loop = true;
   var pointer = 108;
   var long = 4; // 32 bit
-	// 4 cmd /3
-	// 4 header /7
-	// 4 fill /11
-	// 2 length /13
-	// 4 Signature /17
-	// 4 fill1 /21
-	// 4 fill2 /25
-	// 4 fill3 /29
-	// 4 serial /33
-	// var header = binary.parse(hex2bin(hex.substr(0,108)))
-	// 		.word32bu('cmd')
-	// 		.word32bu('header')
-	// 		.word32bu('fill0')
-	// 		.word16bu('length')
-	// 		.word32bu('ethsig')
-	// 		.word32bu('fill1')
-	// 		.word32bu('fill2')
-	// 		.word32bu('fill3')
-	// 		.word32lu('serial')
-	// 		.word8bs('result')
-	// 		.buffer('fill4',19)
-	// 		.vars
-	// ;
 
 	var cmdLength = hex.length;
 	while (loop) {
-		//adapter.log.debug("loop ...");
-		// var what = binary.parse(hex2bin(hex.substr(pointer,16)))
-		// .word32lu('code')
-		// .word32bu('timestamp')
-		// .vars
-		// ;
 		var code = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
 		pointer += 8;
 		var timestamp = get32Bit(hex.substr(pointer,8));
@@ -445,10 +415,6 @@ function decodeData(hex) {
 				adapter.log.debug("SPOT_PDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "821E00") {	// Device class
-				// var tmp = binary.parse(hex2bin(hex.substr(pointer,16)))
-				// 	.word32lu('devClass')
-				// 	.vars
-				// 	;
 				var devClass = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
 				var type = devClass & 0x00FFFFFF;
 				adapter.log.debug("type : "+type);
