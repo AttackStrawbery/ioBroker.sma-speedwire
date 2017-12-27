@@ -24,9 +24,9 @@
         "schedule": "*/5 * * * *",
         "icon": "sma-speedwire.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma-speedwire.png",
+        "extIcon": "https://github.com/AttackStrawbery/iobroker.sma-speedwire/release/admin/sma-speedwire.png",
         "keywords": ["sma-speedwire"],
-        "readme": "https://github.com/ioBroker/ioBroker.sma-speedwire/blob/master/README.md",
+        "readme": "https://github.com/AttackStrawbery/iobroker.sma-speedwire/release/README.md",
         "loglevel": "debug",
         "type": "general"
     },
