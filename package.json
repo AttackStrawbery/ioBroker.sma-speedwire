@@ -1,0 +1,47 @@
+{
+  "name": "iobroker.sma-speedwire",
+  "version": "0.6.5",
+  "description": "ioBroker sma-speedwire Adapter",
+  "author": {
+    "name": "@@Author@@",
+    "email": "@@email@@"
+  },
+  "contributors": [
+    {
+      "name": "@@Author@@",
+      "email": "@@email@@"
+    }
+  ],
+  "homepage": "https://github.com/ioBroker/ioBroker.sma-speedwire",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "sma-speedwire",
+    "sma-speedwire Home",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ioBroker/ioBroker.sma-speedwire"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-replace": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-jscs": "^3.0.1",
+    "grunt-http": "^2.2.0",
+    "mocha": "^3.5.3",
+    "chai": "^4.1.2",
+    "dgram":"^1.0.1",
+    "binary":"^0.3.0"
+  },
+  "main": "sma-speedwire.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.sma-speedwire/issues"
+  },
+  "readmeFilename": "README.md"
+}
