@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sma-speedwire",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "ioBroker sma-speedwire Adapter",
   "author": {
     "name": "@@Author@@",
