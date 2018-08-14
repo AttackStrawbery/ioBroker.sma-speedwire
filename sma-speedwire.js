@@ -245,6 +245,7 @@ function main() {
     sendCommand("SpotACVoltage",client);
     sendCommand("SpotACTotalPower",client);
     sendCommand("MaxACPower",client);
+		logout(client);
 		// Force terminate after 5min
 		waitCallBack();
 }
@@ -265,6 +266,28 @@ function waitCallBack()  {
 	process.exit(0);
 }
 
+// Logout
+function logout(socket) {
+	var cmdheader = "534D4100000402A00000000100";
+	var pktlength = "22";
+	var esignature = "0010606508A0";
+	var encpasswd = "888888888888888888888888";
+	var cmdId = "0E01FDFF" + "FFFFFFFF" + "00000000";
+	var timeStamp = Math.floor(Date.now() / 1000).toString(16);
+
+	var cmd = cmdheader + pktlength + esignature + ByteOrderShort(anySusyId) + ByteOrderLong(anySerial);
+
+	cmd = cmd  + "0003" + ByteOrderShort(mySusyId) + ByteOrderLong(mySerial) + "0003" + "00000000" + decimalToHex(pktId++,4) + cmdId;
+	var cmdBytes = hex2bin(cmd);
+
+	socket.send(cmdBytes, 0, cmdBytes.length, PORT, HOST, function(err, bytes) {
+				if (err) throw err;
+				adapter.log.debug('logout UDP message sent to ' + HOST +':'+ PORT + ' : ' + cmd) ;
+	});
+	//callBackCount++;
+}
+
+// Login to inverter
 function login(user,password,socket) {
     var cmdheader = "534D4100000402A00000000100";
     var pktlength = "3A";
@@ -283,10 +306,10 @@ function login(user,password,socket) {
     var cmd = cmdheader + pktlength + esignature + ByteOrderShort(anySusyId) + ByteOrderLong(anySerial);
     cmd = cmd  + "0001" + ByteOrderShort(mySusyId) + ByteOrderLong(mySerial) + "0001" + "00000000" + decimalToHex(pktId++,4) + cmdId + timeStamp + "00000000" + arrayencpasswd.join('') + "00000000" ;
     var cmdBytes = hex2bin(cmd);
-		adapter.log.debug("send cmd : "+cmd);
+
 		socket.send(cmdBytes, 0, cmdBytes.length, PORT, HOST, function(err, bytes) {
 		      if (err) throw err;
-		      adapter.log.debug('UDP message sent to ' + HOST +':'+ PORT);
+		      adapter.log.debug('login UDP message sent to ' + HOST +':'+ PORT+ ' : ' + cmd);
 		 //     client.close();
 		});
 		callBackCount++;
@@ -388,9 +411,6 @@ function ByteOrderLong(s) {
     return output;
 }
 
-function getLong(hex) {
-
-}
 function decodeData(hex) {
   adapter.log.debug("decodeData input : "+hex);
 
@@ -400,13 +420,13 @@ function decodeData(hex) {
 
 	var cmdLength = hex.length;
 	while (loop) {
-		var code = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+		var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
 		pointer += 8;
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
 		//console.dir(what);
-		var code = code & 0x00ffff00;
-		var cls = code & 0xff;
+		var code = tmp & 0x00ffff00;
+		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
 		adapter.log.debug("cmd : " + cmd);
