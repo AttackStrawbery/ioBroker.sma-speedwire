@@ -1,10 +1,10 @@
-// Dictionary (systemDictionary is global variable from adapter-settings.js)
+/*global systemDictionary:true */
+'use strict';
+
 systemDictionary = {
-	"template adapter settings": {"de": "Beispiel", "ru": "Пример"},
-	"test1":                    {"en": "Test 1", "de": "Test 1", "ru": "Тест 1"},
-	"test2":                    {"en": "Test 2", "de": "Test 2", "ru": "Тест 2"},
-	"on save adapter restarts with new config immediately": {
-		"de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
-		"ru": "При сохранении настроек адаптера он сразу же перезапускается"
-	}
+    "ip address of sma device": {                    "en": "ip address of sma device",                        "de": "IP Adresse des Inverters",                        "ru": "ip-адрес sma-устройства",                         "pt": "endereço ip do dispositivo sma",                  "nl": "ip-adres van het sma-apparaat",                   "fr": "adresse ip du périphérique sma",                  "it": "indirizzo IP del dispositivo sma",                "es": "dirección IP del dispositivo sma",                "pl": "adres ip urządzenia sma"},
+    "on save adapter restarts with new config immediately": {"en": "on save adapter restarts with new config immediately", "de": "Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet.", "ru": "на перезаписываемом адаптере перезагружается с новой конфигурацией немедленно", "pt": "on save adapter reinicia com nova configuração imediatamente", "nl": "on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config", "fr": "sur la sauvegarde de l'adaptateur redémarre immédiatement avec la nouvelle configuration", "it": "su save adapter si riavvia immediatamente con la nuova configurazione", "es": "en el adaptador de guardar se reinicia con nueva configuración de inmediato", "pl": "na karcie save natychmiast uruchamia się z nową konfiguracją"},
+    "password for login": {                          "en": "password for login",                              "de": "Password für den Benutzer",                       "ru": "пароль для входа",                                "pt": "senha para login",                                "nl": "wachtwoord voor inloggen",                        "fr": "mot de passe pour la connexion",                  "it": "password per il login",                           "es": "contraseña para iniciar sesión",                  "pl": "hasło do logowania"},
+    "the port where the device is listening": {      "en": "the port where the device is listening",          "de": "Der Port für die Verbindung",                     "ru": "порт, на котором устройство прослушивает",        "pt": "a porta em que o dispositivo está escutando",     "nl": "de poort waar het apparaat luistert",             "fr": "le port sur lequel le périphérique écoute",       "it": "la porta in cui il dispositivo è in ascolto",     "es": "el puerto donde el dispositivo está escuchando",  "pl": "port, w którym urządzenie nasłuchuje"},
+    "user name for login": {                         "en": "user name for login",                             "de": "Name des Benutzers",                              "ru": "имя пользователя для входа",                      "pt": "nome de usuário para login",                      "nl": "gebruikersnaam voor inloggen",                    "fr": "nom d'utilisateur pour la connexion",             "it": "nome utente per il login",                        "es": "nombre de usuario para iniciar sesión",           "pl": "nazwa użytkownika do logowania"},
 };
