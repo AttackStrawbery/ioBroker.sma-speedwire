@@ -1,8 +1,7 @@
 {
     "common": {
-        "materialize": true,
         "name": "sma-speedwire",
-        "version": "0.6.8",
+        "version": "0.6.9",
         "news": {
             "0.5.0": {
 
@@ -33,6 +32,7 @@
         "mode": "schedule",
         "schedule": "*/5 * * * *",
         "icon": "sma-speedwire.png",
+        "materialize": true,
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma-speedwire.png",
         "keywords": ["sma-speedwire"],
