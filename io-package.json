@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "sma-speedwire",
-        "version": "0.6.5",
+        "version": "0.6.9",
         "news": {
             "0.5.0": {
 
@@ -13,16 +13,26 @@
         },
         "title": "Javascript/Node.js based sma-speedwire adapter",
         "desc": {
-            "en": "ioBroker sma-speedwire Adapter",
-            "de": "ioBroker Sma-speedwire Adapter"
-        },
+            "Adapter to query values from sma devices": {
+              "en": "Adapter to query values from sma devices",
+              "de": "Adapter zum Abfragen von Werten von SMA-Geräten",
+              "ru": "Адаптер для запроса значений из sma-устройств",
+              "pt": "Adaptador para consultar valores de dispositivos sma",
+              "nl": "Adapter om waarden op te vragen van sma-apparaten",
+              "fr": "Adaptateur pour interroger les valeurs des périphériques sma",
+              "it": "Adattatore per interrogare i valori dai dispositivi sma",
+              "es": "Adaptador para consultar valores de dispositivos sma",
+              "pl": "Adapter do wyszukiwania wartości z urządzeń sma"
+            }
+          },
         "authors": [
-            "Thomas <thomas@hepper.eu>"
+            "my Name <thomasAthepper.eu>"
         ],
         "platform": "Javascript/Node.js",
         "mode": "schedule",
         "schedule": "*/5 * * * *",
         "icon": "sma-speedwire.png",
+        "materialize": true,
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma-speedwire.png",
         "keywords": ["sma-speedwire"],
