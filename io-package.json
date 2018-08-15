@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "sma-speedwire",
-        "version": "0.6.9",
+        "version": "0.6.10",
         "news": {
             "0.5.0": {
 
@@ -37,7 +37,7 @@
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma-speedwire.png",
         "keywords": ["sma-speedwire"],
         "readme": "https://github.com/ioBroker/ioBroker.sma-speedwire/blob/master/README.md",
-        "loglevel": "debug",
+        "loglevel": "info",
         "type": "general"
     },
     "native": {
