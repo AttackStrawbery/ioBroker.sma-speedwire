@@ -309,7 +309,7 @@ function login(user,password,socket) {
 
 		socket.send(cmdBytes, 0, cmdBytes.length, PORT, HOST, function(err, bytes) {
 		      if (err) throw err;
-		      adapter.log.debug('login UDP message sent to ' + HOST +':'+ PORT);
+		      adapter.log.debug('login UDP message sent to ' + HOST +':'+ PORT+ ' : ' + cmd);
 		 //     client.close();
 		});
 		callBackCount++;
@@ -411,9 +411,6 @@ function ByteOrderLong(s) {
     return output;
 }
 
-function getLong(hex) {
-
-}
 function decodeData(hex) {
   adapter.log.debug("decodeData input : "+hex);
 
@@ -423,13 +420,13 @@ function decodeData(hex) {
 
 	var cmdLength = hex.length;
 	while (loop) {
-		var code = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+		var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
 		pointer += 8;
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
 		//console.dir(what);
-		var code = code & 0x00ffff00;
-		var cls = code & 0xff;
+		var code = tmp & 0x00ffff00;
+		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
 		adapter.log.debug("cmd : " + cmd);
