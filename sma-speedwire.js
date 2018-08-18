@@ -133,7 +133,7 @@ var commands = {
 	InverterTemperature: { /* Used */
 		command: littleEndianHex("52000200"),
 		first: littleEndianHex("00237700"),
-		last: littleEndianHex("00618FFF"),
+		last: littleEndianHex("002377FF"),
 		label: "INV_TEMP"
 	},
 	sbftest: {
