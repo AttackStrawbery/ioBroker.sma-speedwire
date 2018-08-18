@@ -1,0 +1,5 @@
+dirección IP del dispositivo sma
+en el adaptador de guardar se reinicia con nueva configuración de inmediato
+contraseña para iniciar sesión
+el puerto donde el dispositivo está escuchando
+nombre de usuario para iniciar sesión

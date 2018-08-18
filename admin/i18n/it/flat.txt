@@ -1,0 +1,5 @@
+indirizzo IP del dispositivo sma
+su save adapter si riavvia immediatamente con la nuova configurazione
+password per il login
+la porta in cui il dispositivo è in ascolto
+nome utente per il login

@@ -1,0 +1,5 @@
+adres ip urządzenia sma
+na karcie save natychmiast uruchamia się z nową konfiguracją
+hasło do logowania
+port, w którym urządzenie nasłuchuje
+nazwa użytkownika do logowania
