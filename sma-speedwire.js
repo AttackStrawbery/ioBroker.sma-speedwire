@@ -428,14 +428,14 @@ function decodeData(hex) {
 		} else if (cmd === "821F00") { // Device class
 				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_CLASS',translate('INV_CLASS'),'number','value',tmp);
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'number','value',tmp);
 					adapter.log.debug("INV_CLASS : "+tmp);
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
 				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_TYPE',translate('INV_TYPE'),'number','value',tmp);
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'number','value',tmp);
 					adapter.log.debug("INV_TYPE : "+tmp);
 				}
 				pointer += 64;
@@ -443,84 +443,84 @@ function decodeData(hex) {
 				pointer += 64;
 		} else if (cmd === "263F00") {
 				adapter.log.debug("SPOT_PACTOT : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PACTOT',translate('SPOT_PACTOT'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464000") {
 				adapter.log.debug("SPOT_PAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PAC1',translate('SPOT_PAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464100") {
 				adapter.log.debug("SPOT_PAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PAC2',translate('SPOT_PAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464200") {
 				adapter.log.debug("SPOT_PAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PAC3',translate('SPOT_PAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464800") {
 				adapter.log.debug("SPOT_UAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_UAC1',translate('SPOT_UAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464900") {
 				adapter.log.debug("SPOT_UAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_UAC2',translate('SPOT_UAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "464A00") {
 				adapter.log.debug("SPOT_UAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_UAC3',translate('SPOT_UAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465000") {
 				adapter.log.debug("SPOT_IAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC1',translate('SPOT_IAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465100") {
 				adapter.log.debug("SPOT_IAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC2',translate('SPOT_IAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465200") {
 				adapter.log.debug("SPOT_IAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC3',translate('SPOT_IAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				adapter.setState("SPOT_IAC3",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465300") {
 				adapter.log.debug("SPOT_IAC1_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC1_2',translate('SPOT_IAC1_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465400") {
 				adapter.log.debug("SPOT_IAC2_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC2_2',translate('SPOT_IAC2_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "465500") {
 				adapter.log.debug("SPOT_IAC3_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IAC3_2',translate('SPOT_IAC3_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "452100") {
 				adapter.log.debug("SPOT_IDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_IDC'+cls,translate('SPOT_IDC'+cls),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "411E00") {
 				adapter.log.debug("SPOT_PACMAX1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PACMAX1',translate('SPOT_PACMAX1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PACMAX1',translateName('SPOT_PACMAX1'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "411F00") {
 				adapter.log.debug("SPOT_PACMAX2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PACMAX2',translate('SPOT_PACMAX2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PACMAX2',translateName('SPOT_PACMAX2'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "412000") {
 				adapter.log.debug("SPOT_PACMAX3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_PACMAX3',translate('SPOT_PACMAX3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_PACMAX3',translateName('SPOT_PACMAX3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "451F00") {
 				adapter.log.debug("SPOT_UDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				updateState('','SPOT_UDC'+cls,translate('SPOT_UDC'+cls),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "262200") {
 			adapter.log.debug("SPOT_ETODAY : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			updateState('','SPOT_ETODAY',translate('SPOT_ETODAY'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+			updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 			pointer += 16;
 		} else if (cmd === "260100") {
 			adapter.log.debug("SPOT_ETOTAL : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			updateState('','SPOT_ETOTAL',translate('SPOT_ETOTAL'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+			updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 			pointer += 16;
 		} else {
 			if (pointer >= cmdLength) {
