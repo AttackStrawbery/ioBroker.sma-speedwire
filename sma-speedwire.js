@@ -452,7 +452,7 @@ function decodeData(hex) {
 				pointer += 64;
 		} else if (cmd === "823400") {	/* Software Version etc. */
 				adapter.log.debug("INV_SWVER");
-				pointer += 64;
+				pointer += 40;
 		} else if (cmd === "263F00") {
 				/* adapter.log.debug("SPOT_PACTOT : " + value); */
 				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value);
