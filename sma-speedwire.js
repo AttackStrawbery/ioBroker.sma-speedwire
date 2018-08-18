@@ -222,7 +222,7 @@ function main() {
     login(adapter.config.user,adapter.config.password,client);
     sendCommand("sbftest",client);
     sendCommand("TypeLabel",client);
-    sendCommand("SoftwareVersion",client);
+    /* sendCommand("SoftwareVersion",client); */
     sendCommand("EnergyProduction",client);
     sendCommand("SpotDCVoltage",client);
     sendCommand("SpotDCPower",client);
