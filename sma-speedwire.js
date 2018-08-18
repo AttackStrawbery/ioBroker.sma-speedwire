@@ -34,43 +34,43 @@
 // you have to require the utils module and call adapter function
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 var commands = {
-	EnergyProduction: {
+	EnergyProduction: {	/* Used */
 		command: littleEndianHex("54000200"),
 		first: littleEndianHex("00260100"),
 		last: littleEndianHex("002622FF"),
 		label: "SPOT_ETODAY, SPOT_ETOTA"
 	},
-	SpotDCPower: {
+	SpotDCPower: { /* Used */
 		command: littleEndianHex("53800200"),
 		first: littleEndianHex("00251E00"),
 		last: littleEndianHex("00251EFF"),
 		label: "SPOT_PDC1, SPOT_PDC2"
 	},
-	SpotDCVoltage: {
+	SpotDCVoltage: { /* Used */
 		command: littleEndianHex("53800200"),
 		first: littleEndianHex("00451F00"),
 		last: littleEndianHex("004521FF"),
 		label: "SPOT_UDC1, SPOT_UDC2, SPOT_IDC1, SPOT_IDC2"
 	},
-	SpotACPower: {
+	SpotACPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00464000"),
 		last: littleEndianHex("004642FF"),
 		label: "SPOT_PAC1, SPOT_PAC2, SPOT_PAC3"
 	},
-	SpotACVoltage: {
+	SpotACVoltage: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00464800"),
 		last: littleEndianHex("004655FF"),
 		label: "POT_UAC1, SPOT_UAC2, SPOT_UAC3, SPOT_IAC1, SPOT_IAC2, SPOT_IAC3"
 	},
-	SpotGridFrequency: {
+	SpotGridFrequency: { /* Unused */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00465700"),
 		last: littleEndianHex("004657FF"),
 		label: "SPOT_FREQ"
 	},
-	MaxACPower: {
+	MaxACPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00411E00"),
 		last: littleEndianHex("004120FF"),
@@ -82,55 +82,55 @@ var commands = {
 		last: littleEndianHex("00832AFF"),
 		label: "NV_PACMAX1_2"
 	},
-	SpotACTotalPower: {
+	SpotACTotalPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00263F00"),
 		last: littleEndianHex("00263FFF"),
 		label: "SPOT_PACTOT"
 	},
-	TypeLabel: {
+	TypeLabel: { /* Used */
 		command: littleEndianHex("58000200"),
 		first: littleEndianHex("00821E00"),
 		last: littleEndianHex("008220FF"),
 		label: "INV_NAME, INV_TYPE, INV_CLASS"
 	},
-	SoftwareVersion: {
+	SoftwareVersion: { /* Used */
 		command: littleEndianHex("58000200"),
 		first: littleEndianHex("0082340"),
 		last: littleEndianHex("008234FF"),
 		label: "INV_SWVERSION"
 	},
-	DeviceStatus: {
+	DeviceStatus: { /* Unused */
 		command: littleEndianHex("51800200"),
 		first: littleEndianHex("00214800"),
 		last: littleEndianHex("002148FF"),
 		label: "INV_STATUS"
 	},
-	GridRelayStatus: {
+	GridRelayStatus: { /* Unused */
 		command: littleEndianHex("51800200"),
 		first: littleEndianHex("00416400"),
 		last: littleEndianHex("004164FF"),
 		label: "INV_GRIDRELAY"
 	},
-	OperationTime: {
+	OperationTime: { /* Unused */
 		command: littleEndianHex("54000200"),
 		first: littleEndianHex("00462E00"),
 		last: littleEndianHex("00462FFF"),
 		label: "SPOT_OPERTM, SPOT_FEEDTM"
 	},
-	BatteryChargeStatus: {
+	BatteryChargeStatus: { /* Unused */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00295A00"),
 		last: littleEndianHex("00295AFF"),
 		label: " "
 	},
-	BatteryInfo: {
+	BatteryInfo: { /* Unused*/
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00491E00"),
 		last: littleEndianHex("00495DFF"),
 		label: " "
 	},
-	InverterTemperature: {
+	InverterTemperature: { /* Unused */
 		command: littleEndianHex("52000200"),
 		first: littleEndianHex("00237700"),
 		last: littleEndianHex("00618FFF"),
@@ -219,18 +219,18 @@ function main() {
       adapter.log.debug(`server listening ${address.address}:${address.port}`);
     });
 
-    //client.bind(PORT);
     login(adapter.config.user,adapter.config.password,client);
     sendCommand("sbftest",client);
     sendCommand("TypeLabel",client);
-    //sendCommand("SoftwareVersion");
+    sendCommand("SoftwareVersion",client);
     sendCommand("EnergyProduction",client);
     sendCommand("SpotDCVoltage",client);
     sendCommand("SpotDCPower",client);
     sendCommand("SpotACPower",client);
     sendCommand("SpotACVoltage",client);
     sendCommand("SpotACTotalPower",client);
-    sendCommand("MaxACPower",client);
+	sendCommand("MaxACPower",client);
+	sendCommand("SpotGridFrequency",client);
 		logout(client);
 		// Force terminate after 5min
 		waitCallBack();
@@ -410,13 +410,15 @@ function decodeData(hex) {
 		pointer += 8;
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
-		//console.dir(what);
 		var code = tmp & 0x00ffff00;
+		adapter.log.debug("Code : " + code);
 		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
+		adapter.log.debug("code : " + code);
+		adapter.log.debug("cls : " + cls);
+		adapter.log.debug("dataType : "+ dataType);
 		adapter.log.debug("cmd : " + cmd);
-		//pointer += 16;
 		if (cmd === "251E00") {
 				adapter.log.debug("SPOT_PDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
@@ -440,6 +442,7 @@ function decodeData(hex) {
 				}
 				pointer += 64;
 		} else if (cmd === "823400") {	/* Software Version etc. */
+				adapter.log.debug("INV_SWVER");
 				pointer += 64;
 		} else if (cmd === "263F00") {
 				/* adapter.log.debug("SPOT_PACTOT : " + get32Bit(ByteOrderLong(hex.substr(pointer,8)))); */
