@@ -96,7 +96,7 @@ var commands = {
 	},
 	SoftwareVersion: { /* Used */
 		command: littleEndianHex("58000200"),
-		first: littleEndianHex("0082340"),
+		first: littleEndianHex("00823400"),
 		last: littleEndianHex("008234FF"),
 		label: "INV_SWVERSION"
 	},
