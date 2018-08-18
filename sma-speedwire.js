@@ -534,11 +534,11 @@ function decodeData(hex) {
 				pointer +=40;
 		} else if (cmd === "262200") {
 				/* adapter.log.debug("SPOT_ETODAY : " + value); */
-				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',value);
+				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',value/100);
 				pointer += 16;
 		} else if (cmd === "260100") {
 				/* adapter.log.debug("SPOT_ETOTAL : " + value); */
-				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value);
+				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value/1000);
 				pointer += 16;
 		} else {
 			if (pointer >= cmdLength) {
