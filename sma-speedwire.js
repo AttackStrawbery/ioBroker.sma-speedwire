@@ -130,11 +130,11 @@ var commands = {
 		last: littleEndianHex("00495DFF"),
 		label: " "
 	},
-	InverterTemperature: { /* Unused */
+	InverterTemperature: { /* Used */
 		command: littleEndianHex("52000200"),
 		first: littleEndianHex("00237700"),
 		last: littleEndianHex("00618FFF"),
-		label: " "
+		label: "INV_TEMP"
 	},
 	sbftest: {
 		command: littleEndianHex("64020200"),
@@ -231,6 +231,7 @@ function main() {
     sendCommand("SpotACTotalPower",client);
 	sendCommand("MaxACPower",client);
 	sendCommand("SpotGridFrequency",client);
+	sendCommand("InverterTemperature",client);
 	logout(client);
 	// Force terminate after 5min
 	waitCallBack();
@@ -526,7 +527,10 @@ function decodeData(hex) {
 				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value);
 				pointer += 40;
 		} else if (cmd === "465700") {
-				updateState('','SPOT_FREQ',translateName('SPOT_ETOTAL'),'number','value',value/100);
+				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100);
+				pointer +=40;
+		} else if (cmd === "237700") {
+				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value',value);
 				pointer +=40;
 		} else if (cmd === "262200") {
 				/* adapter.log.debug("SPOT_ETODAY : " + value); */
