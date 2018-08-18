@@ -30,7 +30,7 @@
         ],
         "platform": "Javascript/Node.js",
         "mode": "schedule",
-        "schedule": "*/5 * * * *",
+        "schedule": "*/30 * * * * *",
         "icon": "sma-speedwire.png",
         "materialize": true,
         "enabled": true,
