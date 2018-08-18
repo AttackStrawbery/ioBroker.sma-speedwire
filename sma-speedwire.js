@@ -428,15 +428,15 @@ function decodeData(hex) {
 		} else if (cmd === "821F00") { /* Device class */
 				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','value',translateName(tmp));
-					adapter.log.debug("INV_CLASS : "+translateName(tmp));
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','value',translateName(tmp.toString()));
+					adapter.log.debug("INV_CLASS : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
 				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','value',translateName(tmp));
-					adapter.log.debug("INV_TYPE : "+translateName(tmp));
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','value',translateName(tmp.toString()));
+					adapter.log.debug("INV_TYPE : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "823400") {	/* Software Version etc. */
