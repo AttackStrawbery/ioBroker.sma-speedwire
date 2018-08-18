@@ -64,7 +64,7 @@ var commands = {
 		last: littleEndianHex("004655FF"),
 		label: "POT_UAC1, SPOT_UAC2, SPOT_UAC3, SPOT_IAC1, SPOT_IAC2, SPOT_IAC3"
 	},
-	SpotGridFrequency: { /* Unused */
+	SpotGridFrequency: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00465700"),
 		last: littleEndianHex("004657FF"),
@@ -231,9 +231,9 @@ function main() {
     sendCommand("SpotACTotalPower",client);
 	sendCommand("MaxACPower",client);
 	sendCommand("SpotGridFrequency",client);
-		logout(client);
-		// Force terminate after 5min
-		waitCallBack();
+	logout(client);
+	// Force terminate after 5min
+	waitCallBack();
 }
 
 
@@ -426,7 +426,7 @@ function decodeData(hex) {
 		adapter.log.debug("cls : " + cls);
 		adapter.log.debug("dataType : "+ dataType);
 		adapter.log.debug("cmd : " + cmd + " value: "+value);
-		
+
 		if (cmd === "251E00") {
 				adapter.log.debug("SPOT_PDC"+cls+" : " + value);
 				pointer += 40;
@@ -438,14 +438,14 @@ function decodeData(hex) {
 		} else if (cmd === "821F00") { /* Device class */
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','value',translateName(tmp.toString()));
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','text',translateName(tmp.toString()));
 					adapter.log.debug("INV_CLASS : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','value',translateName(tmp.toString()));
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','text',translateName(tmp.toString()));
 					adapter.log.debug("INV_TYPE : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
@@ -537,7 +537,7 @@ function decodeData(hex) {
 				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value);
 				pointer += 16;
 		} else {
-			if (pointer >= cmdLength) {
+			if (pointer >= cmdLength - 3) {
 				adapter.log.debug("End of input");
 				loop = false;
 			} else {
