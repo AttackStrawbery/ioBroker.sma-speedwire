@@ -154,6 +154,8 @@ var waitCount = 0;
 var maxWaitCount = 10;
 var dgram = require('dgram');
 var pktId = 480;
+var systemLanguage;
+var nameTranslation;
 
 // Configure this using the admin interface
 var PORT;
