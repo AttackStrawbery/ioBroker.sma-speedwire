@@ -508,7 +508,7 @@ function decodeData(hex) {
 				pointer += 40;
 		} else if (cmd === "452100") {
 				/* adapter.log.debug("SPOT_IDC"+cls+" : " + value); */
-				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',value);
+				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',value/1000);
 				pointer += 40;
 		} else if (cmd === "411E00") {
 				/* adapter.log.debug("SPOT_PACMAX1 : " + value); */
@@ -524,7 +524,7 @@ function decodeData(hex) {
 				pointer += 40;
 		} else if (cmd === "451F00") {
 				/* dapter.log.debug("SPOT_UDC"+cls+" : " + value); */
-				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value);
+				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value/100);
 				pointer += 40;
 		} else if (cmd === "465700") {
 				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100);
