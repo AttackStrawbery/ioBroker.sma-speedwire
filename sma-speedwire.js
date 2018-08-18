@@ -541,7 +541,7 @@ function decodeData(hex) {
 				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value);
 				pointer += 16;
 		} else {
-			if (pointer >= cmdLength - 3) {
+			if (pointer >= cmdLength) {
 				adapter.log.debug("End of input");
 				loop = false;
 			} else {
