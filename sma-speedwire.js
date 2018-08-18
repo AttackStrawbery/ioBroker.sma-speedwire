@@ -411,7 +411,6 @@ function decodeData(hex) {
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
 		var code = tmp & 0x00ffff00;
-		adapter.log.debug("Code : " + code);
 		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
@@ -514,17 +513,17 @@ function decodeData(hex) {
 				updateState('','SPOT_PACMAX3',translateName('SPOT_PACMAX3'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "451F00") {
-				a/* dapter.log.debug("SPOT_UDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8)))); */
+				/* dapter.log.debug("SPOT_UDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8)))); */
 				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
 				pointer += 40;
 		} else if (cmd === "262200") {
 				/* adapter.log.debug("SPOT_ETODAY : " + get32Bit(ByteOrderLong(hex.substr(pointer,8)))); */
-				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				pointer += 16;
+				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',get64Bit(ByteOrderLong(hex.substr(pointer,16))));
+				pointer += 22;
 		} else if (cmd === "260100") {
 				/* adapter.log.debug("SPOT_ETOTAL : " + get32Bit(ByteOrderLong(hex.substr(pointer,8)))); */
-				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				pointer += 16;
+				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',get64Bit(ByteOrderLong(hex.substr(pointer,16))));
+				pointer += 22;
 		} else {
 			if (pointer >= cmdLength) {
 				adapter.log.debug("End of input");
@@ -545,6 +544,14 @@ function get32Bit(hex) {
 	if (hex.toUpperCase() === "80000000" || hex.toUpperCase() === "FFFFFFFF") {
 		return 0;
 	}
+	return parseInt(hex,16);
+}
+
+function get64Bit(hex) {
+	adapter.log.debug("get64Bit : " + hex);
+/* 	if (hex.toUpperCase() === "80000000" || hex.toUpperCase() === "FFFFFFFF") {
+		return 0;
+	} */
 	return parseInt(hex,16);
 }
 
