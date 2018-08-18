@@ -11,7 +11,7 @@
                 "de": "Initiale Version"
             }
         },
-        "title": "Javascript/Node.js based sma-speedwire adapter",
+        "title": "sma inverter speedwire adapter",
         "desc": {
             "Adapter to query values from sma devices": {
               "en": "Adapter to query values from sma devices",

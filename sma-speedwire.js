@@ -471,40 +471,40 @@ function decodeData(hex) {
 				pointer += 40;
 		} else if (cmd === "464800") {
 				/* adapter.log.debug("SPOT_UAC1 : " + value); */
-				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',value);
+				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',value/100);
 				pointer += 40;
 		} else if (cmd === "464900") {
 				/* adapter.log.debug("SPOT_UAC2 : " + value); */
-				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',value);
+				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',value/100);
 				pointer += 40;
 		} else if (cmd === "464A00") {
 				/* adapter.log.debug("SPOT_UAC3 : " + value); */
-				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',value);
+				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',value/100);
 				pointer += 40;
 		} else if (cmd === "465000") {
 				/* adapter.log.debug("SPOT_IAC1 : " + value); */
-				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',value);
+				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',value/1000);
 				pointer += 40;
 		} else if (cmd === "465100") {
 				/* adapter.log.debug("SPOT_IAC2 : " + value); */
-				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',value);
+				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',value)/1000;
 				pointer += 40;
 		} else if (cmd === "465200") {
 				/* adapter.log.debug("SPOT_IAC3 : " + value); */
-				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',value);
+				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',value/1000);
 				adapter.setState("SPOT_IAC3",value);
 				pointer += 40;
 		} else if (cmd === "465300") {
 				/* adapter.log.debug("SPOT_IAC1_2 : " + value); */
-				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',value);
+				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',value/1000);
 				pointer += 40;
 		} else if (cmd === "465400") {
 				/* adapter.log.debug("SPOT_IAC2_2 : " + value); */
-				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',value);
+				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',value/1000);
 				pointer += 40;
 		} else if (cmd === "465500") {
 				/* adapter.log.debug("SPOT_IAC3_2 : " + value); */
-				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',value);
+				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',value/1000);
 				pointer += 40;
 		} else if (cmd === "452100") {
 				/* adapter.log.debug("SPOT_IDC"+cls+" : " + value); */

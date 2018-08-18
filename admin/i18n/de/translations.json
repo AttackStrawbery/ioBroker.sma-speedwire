@@ -23,9 +23,10 @@
     "SPOT_UDC3": "SPOT_UDC3",
     "SPOT_PACMAX1": "SPOT_PACMAX1",
     "SPOT_PACMAX2": "SPOT_PACMAX2",
-    "SPOT_PACMAX3": "SPOT_PACMX3",
+    "SPOT_PACMAX3": "SPOT_PACMAX3",
     "SPOT_ETOTAL": "SPOT_ETOTAL",
     "SPOT_ETODAY": "SPOT_ETODAY",
+    "SPOT_FREQ": "SPOT_FREQ",
     "8001": "SolarInverter",
     "8007": "BatteryInverter",
     "9098": "STP 5000TL-20"
