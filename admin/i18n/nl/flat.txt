@@ -1,5 +1,0 @@
-ip-adres van het sma-apparaat
-on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config
-wachtwoord voor inloggen
-de poort waar het apparaat luistert
-gebruikersnaam voor inloggen

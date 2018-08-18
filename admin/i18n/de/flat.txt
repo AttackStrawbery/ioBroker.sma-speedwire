@@ -1,5 +1,0 @@
-IP Adresse des Inverters
-Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet.
-Password für den Benutzer
-Der Port für die Verbindung
-Name des Benutzers

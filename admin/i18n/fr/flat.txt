@@ -1,5 +1,0 @@
-adresse ip du périphérique sma
-sur la sauvegarde de l'adaptateur redémarre immédiatement avec la nouvelle configuration
-mot de passe pour la connexion
-le port sur lequel le périphérique écoute
-nom d'utilisateur pour la connexion
