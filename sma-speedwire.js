@@ -412,7 +412,7 @@ function decodeData(hex) {
 		pointer +=8;
 		//console.dir(what);
 		var code = tmp & 0x00ffff00;
-		var cls = tmp & 0xff;w
+		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
 		adapter.log.debug("cmd : " + cmd);
