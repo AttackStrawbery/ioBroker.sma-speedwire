@@ -439,14 +439,14 @@ function decodeData(hex) {
 		} else if (cmd === "821F00") { /* Device class */
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','text',translateName(tmp.toString()));
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','string',translateName(tmp.toString()));
 					adapter.log.debug("INV_CLASS : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','text',translateName(tmp.toString()));
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','string',translateName(tmp.toString()));
 					adapter.log.debug("INV_TYPE : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
@@ -530,7 +530,7 @@ function decodeData(hex) {
 				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100);
 				pointer +=40;
 		} else if (cmd === "237700") {
-				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value',value);
+				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value.temperature',value/100);
 				pointer +=40;
 		} else if (cmd === "262200") {
 				/* adapter.log.debug("SPOT_ETODAY : " + value); */
