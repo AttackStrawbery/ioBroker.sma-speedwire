@@ -439,14 +439,14 @@ function decodeData(hex) {
 		} else if (cmd === "821F00") { /* Device class */
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','string',translateName(tmp.toString()));
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','string',translateName(tmp.toString()),'');
 					adapter.log.debug("INV_CLASS : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
 				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','string',translateName(tmp.toString()));
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','string',translateName(tmp.toString()),'');
 					adapter.log.debug("INV_TYPE : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
@@ -455,90 +455,90 @@ function decodeData(hex) {
 				pointer += 40;
 		} else if (cmd === "263F00") {
 				/* adapter.log.debug("SPOT_PACTOT : " + value); */
-				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value);
+				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value,'KW');
 				pointer += 40;
 		} else if (cmd === "464000") {
 				/* adapter.log.debug("SPOT_PAC1 : " + value); */
-				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',value);
+				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',value,'KW');
 				pointer += 40;
 		} else if (cmd === "464100") {
 				/* adapter.log.debug("SPOT_PAC2 : " + value); */
-				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',value);
+				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',value,'KW');
 				pointer += 40;
 		} else if (cmd === "464200") {
 				/* adapter.log.debug("SPOT_PAC3 : " + value); */
-				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',value);
+				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',value,'KW');
 				pointer += 40;
 		} else if (cmd === "464800") {
 				/* adapter.log.debug("SPOT_UAC1 : " + value); */
-				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',value/100);
+				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "464900") {
 				/* adapter.log.debug("SPOT_UAC2 : " + value); */
-				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',value/100);
+				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "464A00") {
 				/* adapter.log.debug("SPOT_UAC3 : " + value); */
-				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',value/100);
+				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "465000") {
 				/* adapter.log.debug("SPOT_IAC1 : " + value); */
-				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',value/1000);
+				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465100") {
 				/* adapter.log.debug("SPOT_IAC2 : " + value); */
-				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',value)/1000;
+				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465200") {
 				/* adapter.log.debug("SPOT_IAC3 : " + value); */
-				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',value/1000);
+				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',value/1000,'A');
 				adapter.setState("SPOT_IAC3",value);
 				pointer += 40;
 		} else if (cmd === "465300") {
 				/* adapter.log.debug("SPOT_IAC1_2 : " + value); */
-				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',value/1000);
+				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465400") {
 				/* adapter.log.debug("SPOT_IAC2_2 : " + value); */
-				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',value/1000);
+				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465500") {
 				/* adapter.log.debug("SPOT_IAC3_2 : " + value); */
-				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',value/1000);
+				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "452100") {
 				/* adapter.log.debug("SPOT_IDC"+cls+" : " + value); */
-				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',value/1000);
+				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "411E00") {
 				/* adapter.log.debug("SPOT_PACMAX1 : " + value); */
-				updateState('','SPOT_PACMAX1',translateName('SPOT_PACMAX1'),'number','value',value);
+				updateState('','SPOT_PACMAX1',translateName('SPOT_PACMAX1'),'number','value',value/1000,'KW');
 				pointer += 40;
 		} else if (cmd === "411F00") {
 				/* adapter.log.debug("SPOT_PACMAX2 : " + value); */
-				updateState('','SPOT_PACMAX2',translateName('SPOT_PACMAX2'),'number','value',value);
+				updateState('','SPOT_PACMAX2',translateName('SPOT_PACMAX2'),'number','value',value/1000,'KW');
 				pointer += 40;
 		} else if (cmd === "412000") {
 				/* adapter.log.debug("SPOT_PACMAX3 : " + value); */
-				updateState('','SPOT_PACMAX3',translateName('SPOT_PACMAX3'),'number','value',value);
+				updateState('','SPOT_PACMAX3',translateName('SPOT_PACMAX3'),'number','value',value/1000,'KW');
 				pointer += 40;
 		} else if (cmd === "451F00") {
 				/* dapter.log.debug("SPOT_UDC"+cls+" : " + value); */
-				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value/100);
+				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "465700") {
 				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100);
 				pointer +=40;
 		} else if (cmd === "237700") {
-				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value.temperature',value/100);
+				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value.temperature',value/100,'C°');
 				pointer +=40;
 		} else if (cmd === "262200") {
 				/* adapter.log.debug("SPOT_ETODAY : " + value); */
-				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',value/1000);
+				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',value/1000,'KW');
 				pointer += 16;
 		} else if (cmd === "260100") {
 				/* adapter.log.debug("SPOT_ETOTAL : " + value); */
-				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value/1000);
+				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value/1000,'KW');
 				pointer += 16;
 		} else {
 			if (pointer >= cmdLength) {
@@ -588,14 +588,15 @@ Upate the state, if the state does not exist create it
 	type => number/string/boolean
 	role => value/value.time/state ....
 */
-function updateState(group,tag,transTag,type,role,value) {
+function updateState(group,tag,transTag,type,role,value,unit) {
 	adapter.setObjectNotExists(
 		tag, {
 			type: 'state',
 			common: {
 				name: transTag,
 				type: type,
-				role: role
+				role: role,
+				unit: unit
 			},
 			native: {}
 		},
