@@ -14,9 +14,8 @@
         },
         "title": "IP based Adapter für SMA Wechselrichter",
         "desc": {
-            "Adapter to query values from sma devices": {
               "en": "Adapter to query values from sma devices",
-              "de": "Adapter zum Abfragen von Werten von SMA-Geräten",
+              "de": "Adapter zum Abfragen von Werten von SMA Invertern",
               "ru": "Адаптер для запроса значений из sma-устройств",
               "pt": "Adaptador para consultar valores de dispositivos sma",
               "nl": "Adapter om waarden op te vragen van sma-apparaten",
@@ -24,7 +23,6 @@
               "it": "Adattatore per interrogare i valori dai dispositivi sma",
               "es": "Adaptador para consultar valores de dispositivos sma",
               "pl": "Adapter do wyszukiwania wartości z urządzeń sma"
-            }
           },
         "authors": [
             "my Name <thomasAthepper.eu>"
