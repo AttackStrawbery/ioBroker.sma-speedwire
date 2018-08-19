@@ -455,19 +455,19 @@ function decodeData(hex) {
 				pointer += 40;
 		} else if (cmd === "263F00") {
 				/* adapter.log.debug("SPOT_PACTOT : " + value); */
-				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value,'kW');
+				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464000") {
 				/* adapter.log.debug("SPOT_PAC1 : " + value); */
-				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',value,'kW');
+				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464100") {
 				/* adapter.log.debug("SPOT_PAC2 : " + value); */
-				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',value,'kW');
+				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464200") {
 				/* adapter.log.debug("SPOT_PAC3 : " + value); */
-				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',value,'kW');
+				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464800") {
 				/* adapter.log.debug("SPOT_UAC1 : " + value); */
@@ -527,7 +527,7 @@ function decodeData(hex) {
 				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "465700") {
-				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100);
+				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100,'Hz');
 				pointer +=40;
 		} else if (cmd === "237700") {
 				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value.temperature',value/100,'C°');
