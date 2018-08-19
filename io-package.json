@@ -1,17 +1,18 @@
 {
     "common": {
         "name": "sma-speedwire",
-        "version": "0.6.10",
+        "version": "0.7.0",
         "news": {
-            "0.5.0": {
-
+            "0.7.0": {
+                "en": "Rework in a lot of areas, added role and unit settings for the values",
+                "de": "Überarbeitung in vielen Bereichen, bei den Werten werden nun auch die Werte für die Rolle und Unit gesetzt "
             },
             "0.0.1": {
                 "en": "initial adapter",
                 "de": "Initiale Version"
             }
         },
-        "title": "sma inverter speedwire adapter",
+        "title": "IP based Adapter für SMA Wechselrichter",
         "desc": {
             "Adapter to query values from sma devices": {
               "en": "Adapter to query values from sma devices",
@@ -31,10 +32,10 @@
         "platform": "Javascript/Node.js",
         "mode": "schedule",
         "schedule": "*/30 * * * * *",
-        "icon": "sma-speedwire.png",
+        "icon": "sma.png",
         "materialize": true,
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma-speedwire.png",
+        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma.png",
         "keywords": ["sma-speedwire"],
         "readme": "https://github.com/ioBroker/ioBroker.sma-speedwire/blob/master/README.md",
         "loglevel": "info",
