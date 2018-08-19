@@ -35,9 +35,9 @@
         "icon": "sma.png",
         "materialize": true,
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sma-speedwire/master/admin/sma.png",
+        "extIcon": "https://raw.githubusercontent.com/AttackStrawbery/ioBroker.sma-speedwire/master/admin/sma.png",
         "keywords": ["sma-speedwire"],
-        "readme": "https://github.com/ioBroker/ioBroker.sma-speedwire/blob/master/README.md",
+        "readme": "https://github.com/AttackStrawbery/ioBroker.sma-speedwire/blob/master/README.md",
         "loglevel": "info",
         "type": "general"
     },
