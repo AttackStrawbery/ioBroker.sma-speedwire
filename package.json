@@ -24,14 +24,15 @@
     "type": "git",
     "url": "https://github.com/AttackStrawbery/iobroker.sma-speedwire"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@iobroker/adapter-core": "^1.0.3"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "mocha": "^4.1.0",
     "chai": "^4.1.2",
     "dgram": "^1.0.1",
-    "binary": "^0.3.0",
-    "@iobroker/adapter-core": "^1.0.3"
+    "binary": "^0.3.0"
   },
   "main": "sma-speedwire.js",
   "scripts": {
