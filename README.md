@@ -1,6 +1,6 @@
 ![Logo](admin/sma.png)
 # ioBroker.sma-speedwire
-=================
+![Number of Installations](http://iobroker.live/badges/sma-speedwire-installed.svg) ![Number of Installations](http://iobroker.live/badges/sma-speedwire-stable.svg) =================
 
 This is a adapter for iobroker that can communicate with SMA inverters using the speedwire interface, which is IP based, so you need an IP connection to your device
 
