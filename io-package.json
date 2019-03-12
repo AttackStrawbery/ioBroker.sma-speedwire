@@ -12,7 +12,7 @@
                 "de": "Initiale Version"
             }
         },
-        "title": "IP based Adapter für SMA Wechselrichter",
+        "title": "IP based Communication für SMA Wechselrichter",
         "desc": {
               "en": "Adapter to query values from sma devices",
               "de": "Adapter zum Abfragen von Werten von SMA Invertern",
@@ -27,6 +27,7 @@
         "authors": [
             "my Name <thomasAthepper.eu>"
         ],
+        "license": "MIT",
         "platform": "Javascript/Node.js",
         "mode": "schedule",
         "schedule": "*/30 * * * * *",
