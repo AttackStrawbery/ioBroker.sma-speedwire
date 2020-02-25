@@ -34,43 +34,43 @@
 // you have to require the utils module and call adapter function
 var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
 var commands = {
-	EnergyProduction: {
+	EnergyProduction: {	/* Used */
 		command: littleEndianHex("54000200"),
 		first: littleEndianHex("00260100"),
 		last: littleEndianHex("002622FF"),
 		label: "SPOT_ETODAY, SPOT_ETOTA"
 	},
-	SpotDCPower: {
+	SpotDCPower: { /* Used */
 		command: littleEndianHex("53800200"),
 		first: littleEndianHex("00251E00"),
 		last: littleEndianHex("00251EFF"),
 		label: "SPOT_PDC1, SPOT_PDC2"
 	},
-	SpotDCVoltage: {
+	SpotDCVoltage: { /* Used */
 		command: littleEndianHex("53800200"),
 		first: littleEndianHex("00451F00"),
 		last: littleEndianHex("004521FF"),
 		label: "SPOT_UDC1, SPOT_UDC2, SPOT_IDC1, SPOT_IDC2"
 	},
-	SpotACPower: {
+	SpotACPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00464000"),
 		last: littleEndianHex("004642FF"),
 		label: "SPOT_PAC1, SPOT_PAC2, SPOT_PAC3"
 	},
-	SpotACVoltage: {
+	SpotACVoltage: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00464800"),
 		last: littleEndianHex("004655FF"),
 		label: "POT_UAC1, SPOT_UAC2, SPOT_UAC3, SPOT_IAC1, SPOT_IAC2, SPOT_IAC3"
 	},
-	SpotGridFrequency: {
+	SpotGridFrequency: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00465700"),
 		last: littleEndianHex("004657FF"),
 		label: "SPOT_FREQ"
 	},
-	MaxACPower: {
+	MaxACPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00411E00"),
 		last: littleEndianHex("004120FF"),
@@ -82,59 +82,59 @@ var commands = {
 		last: littleEndianHex("00832AFF"),
 		label: "NV_PACMAX1_2"
 	},
-	SpotACTotalPower: {
+	SpotACTotalPower: { /* Used */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00263F00"),
 		last: littleEndianHex("00263FFF"),
 		label: "SPOT_PACTOT"
 	},
-	TypeLabel: {
+	TypeLabel: { /* Used */
 		command: littleEndianHex("58000200"),
 		first: littleEndianHex("00821E00"),
 		last: littleEndianHex("008220FF"),
 		label: "INV_NAME, INV_TYPE, INV_CLASS"
 	},
-	SoftwareVersion: {
+	SoftwareVersion: { /* Used */
 		command: littleEndianHex("58000200"),
-		first: littleEndianHex("0082340"),
+		first: littleEndianHex("00823400"),
 		last: littleEndianHex("008234FF"),
 		label: "INV_SWVERSION"
 	},
-	DeviceStatus: {
+	DeviceStatus: { /* Unused */
 		command: littleEndianHex("51800200"),
 		first: littleEndianHex("00214800"),
 		last: littleEndianHex("002148FF"),
 		label: "INV_STATUS"
 	},
-	GridRelayStatus: {
+	GridRelayStatus: { /* Unused */
 		command: littleEndianHex("51800200"),
 		first: littleEndianHex("00416400"),
 		last: littleEndianHex("004164FF"),
 		label: "INV_GRIDRELAY"
 	},
-	OperationTime: {
+	OperationTime: { /* Unused */
 		command: littleEndianHex("54000200"),
 		first: littleEndianHex("00462E00"),
 		last: littleEndianHex("00462FFF"),
 		label: "SPOT_OPERTM, SPOT_FEEDTM"
 	},
-	BatteryChargeStatus: {
+	BatteryChargeStatus: { /* Unused */
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00295A00"),
 		last: littleEndianHex("00295AFF"),
 		label: " "
 	},
-	BatteryInfo: {
+	BatteryInfo: { /* Unused*/
 		command: littleEndianHex("51000200"),
 		first: littleEndianHex("00491E00"),
 		last: littleEndianHex("00495DFF"),
 		label: " "
 	},
-	InverterTemperature: {
+	InverterTemperature: { /* Used */
 		command: littleEndianHex("52000200"),
 		first: littleEndianHex("00237700"),
-		last: littleEndianHex("00618FFF"),
-		label: " "
+		last: littleEndianHex("002377FF"),
+		label: "INV_TEMP"
 	},
 	sbftest: {
 		command: littleEndianHex("64020200"),
@@ -154,6 +154,8 @@ var waitCount = 0;
 var maxWaitCount = 10;
 var dgram = require('dgram');
 var pktId = 480;
+var systemLanguage;
+var nameTranslation;
 
 // Configure this using the admin interface
 var PORT;
@@ -163,51 +165,35 @@ var HOST;
 // adapter will be restarted automatically every time as the configuration changed, e.g system.adapter.sma-speedwire.0
 var adapter = utils.adapter('sma-speedwire');
 
-// is called when adapter shuts down - callback has to be called under any circumstances!
-adapter.on('unload', function (callback) {
-    try {
-        adapter.log.info('cleaned everything up...');
-        callback();
-    } catch (e) {
-        callback();
-    }
-});
-
-// is called if a subscribed object changes
-adapter.on('objectChange', function (id, obj) {
-    // Warning, obj can be null if it was deleted
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
-
-// is called if a subscribed state changes
-adapter.on('stateChange', function (id, state) {
-    // Warning, state can be null if it was deleted
-    adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
-
-    // you can use the ack flag to detect if it is status (true) or command (false)
-    if (state && !state.ack) {
-        adapter.log.info('ack is not set!');
-    }
-});
-
-// Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
-adapter.on('message', function (obj) {
-    if (typeof obj == 'object' && obj.message) {
-        if (obj.command == 'send') {
-            // e.g. send email or pushover or whatever
-            adapter.log.debug('send command');
-
-            // Send response in callback if required
-            if (obj.callback) adapter.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-        }
-    }
-});
-
 // is called when databases are connected and adapter received configuration.
 // start here!
 adapter.on('ready', function () {
-    main();
+    adapter.getForeignObject('system.config', function (err, obj) {
+        if (err) {
+            adapter.log.error(err);
+            return;
+        } else if (obj) {
+            if (!obj.common.language) {
+                adapter.log.info("Language not set. English set therefore.");
+                nameTranslation = require(__dirname + '/admin/i18n/en/translations.json')
+            } else {
+                systemLanguage = obj.common.language;
+                nameTranslation = require(__dirname + '/admin/i18n/' + systemLanguage + '/translations.json')
+            }
+            main();
+        }
+    });
+    
 });
+
+function translateName(strName) {
+    if(nameTranslation[strName]) {
+        return nameTranslation[strName];
+    } else {
+        return strName;
+    }
+}
+
 
 function main() {
 
@@ -233,21 +219,22 @@ function main() {
       adapter.log.debug(`server listening ${address.address}:${address.port}`);
     });
 
-    //client.bind(PORT);
     login(adapter.config.user,adapter.config.password,client);
     sendCommand("sbftest",client);
     sendCommand("TypeLabel",client);
-    //sendCommand("SoftwareVersion");
+    /* sendCommand("SoftwareVersion",client); */
     sendCommand("EnergyProduction",client);
     sendCommand("SpotDCVoltage",client);
     sendCommand("SpotDCPower",client);
     sendCommand("SpotACPower",client);
     sendCommand("SpotACVoltage",client);
     sendCommand("SpotACTotalPower",client);
-    sendCommand("MaxACPower",client);
-		logout(client);
-		// Force terminate after 5min
-		waitCallBack();
+	sendCommand("MaxACPower",client);
+	sendCommand("SpotGridFrequency",client);
+	sendCommand("InverterTemperature",client);
+	logout(client);
+	// Force terminate after 5min
+	waitCallBack();
 }
 
 
@@ -417,6 +404,7 @@ function decodeData(hex) {
   var loop = true;
   var pointer = 108;
   var long = 4; // 32 bit
+  var value;
 
 	var cmdLength = hex.length;
 	while (loop) {
@@ -424,117 +412,134 @@ function decodeData(hex) {
 		pointer += 8;
 		var timestamp = get32Bit(hex.substr(pointer,8));
 		pointer +=8;
-		//console.dir(what);
 		var code = tmp & 0x00ffff00;
 		var cls = tmp & 0xff;
 		var dataType = code >> 24;
 		var cmd = code.toString(16).toUpperCase();
-		adapter.log.debug("cmd : " + cmd);
-		//pointer += 16;
+
+		if (cmd === "262200" || cmd === "260100") {
+			value = get64Bit(ByteOrderLong(hex.substr(pointer,16)));
+		} else {
+			value = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+		}
+
+		adapter.log.debug("code : " + code);
+		adapter.log.debug("cls : " + cls);
+		adapter.log.debug("dataType : "+ dataType);
+		adapter.log.debug("cmd : " + cmd + " value: "+value);
+
 		if (cmd === "251E00") {
-				adapter.log.debug("SPOT_PDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				adapter.log.debug("SPOT_PDC"+cls+" : " + value);
 				pointer += 40;
-		} else if (cmd === "821E00") {	// Device class
-				var devClass = get32Bit(ByteOrderLong(hex.substr(pointer,8)));
+		} else if (cmd === "821E00") {	/* Device class */
+				var devClass = value;
 				var type = devClass & 0x00FFFFFF;
 				adapter.log.debug("type : "+type);
 				pointer += 64;
-		} else if (cmd === "821F00") { // Device class
-				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
+		} else if (cmd === "821F00") { /* Device class */
+				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					adapter.setState("INV_CLASS",tmp);
-					adapter.log.debug("INV_CLASS : "+tmp);
+					updateState('','INV_CLASS',translateName('INV_CLASS'),'string','string',translateName(tmp.toString()),'');
+					adapter.log.debug("INV_CLASS : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
 		} else if (cmd === "822000") {
-				var tmp = get32Bit(ByteOrderLong(hex.substr(pointer,8))) & 0x00FFFFFF;
+				var tmp = value & 0x00FFFFFF;
 				if (tmp != 16777214 ) {
-					adapter.setState("INV_TYPE",tmp);
-					adapter.log.debug("INV_TYPE : "+tmp);
+					updateState('','INV_TYPE',translateName('INV_TYPE'),'string','string',translateName(tmp.toString()),'');
+					adapter.log.debug("INV_TYPE : "+translateName(tmp.toString()));
 				}
 				pointer += 64;
-		} else if (cmd === "823400") {	// Software Version etc.
-				pointer += 64;
+		} else if (cmd === "823400") {	/* Software Version etc. */
+				adapter.log.debug("INV_SWVER");
+				pointer += 40;
 		} else if (cmd === "263F00") {
-				adapter.log.debug("SPOT_PACTOT : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PACTOT",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PACTOT : " + value); */
+				updateState('','SPOT_PACTOT',translateName('SPOT_PACTOT'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464000") {
-				adapter.log.debug("SPOT_PAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PAC1",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PAC1 : " + value); */
+				updateState('','SPOT_PAC1',translateName('SPOT_PAC1'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464100") {
-				adapter.log.debug("SPOT_PAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PAC2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PAC2 : " + value); */
+				updateState('','SPOT_PAC2',translateName('SPOT_PAC2'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464200") {
-				adapter.log.debug("SPOT_PAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PAC3",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PAC3 : " + value); */
+				updateState('','SPOT_PAC3',translateName('SPOT_PAC3'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "464800") {
-				adapter.log.debug("SPOT_UAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_UAC1",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_UAC1 : " + value); */
+				updateState('','SPOT_UAC1',translateName('SPOT_UAC1'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "464900") {
-				adapter.log.debug("SPOT_UAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_UAC2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_UAC2 : " + value); */
+				updateState('','SPOT_UAC2',translateName('SPOT_UAC2'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "464A00") {
-				adapter.log.debug("SPOT_UAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_UAC3",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_UAC3 : " + value); */
+				updateState('','SPOT_UAC3',translateName('SPOT_UAC3'),'number','value',value/100,'V');
 				pointer += 40;
 		} else if (cmd === "465000") {
-				adapter.log.debug("SPOT_IAC1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC1",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC1 : " + value); */
+				updateState('','SPOT_IAC1',translateName('SPOT_IAC1'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465100") {
-				adapter.log.debug("SPOT_IAC2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC2 : " + value); */
+				updateState('','SPOT_IAC2',translateName('SPOT_IAC2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465200") {
-				adapter.log.debug("SPOT_IAC3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC3",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC3 : " + value); */
+				updateState('','SPOT_IAC3',translateName('SPOT_IAC3'),'number','value',value/1000,'A');
+				adapter.setState("SPOT_IAC3",value);
 				pointer += 40;
 		} else if (cmd === "465300") {
-				adapter.log.debug("SPOT_IAC1_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC1_2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC1_2 : " + value); */
+				updateState('','SPOT_IAC1_2',translateName('SPOT_IAC1_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465400") {
-				adapter.log.debug("SPOT_IAC2_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC2_2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC2_2 : " + value); */
+				updateState('','SPOT_IAC2_2',translateName('SPOT_IAC2_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "465500") {
-				adapter.log.debug("SPOT_IAC3_2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IAC3_2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IAC3_2 : " + value); */
+				updateState('','SPOT_IAC3_2',translateName('SPOT_IAC3_2'),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "452100") {
-				adapter.log.debug("SPOT_IDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_IDC"+cls,get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_IDC"+cls+" : " + value); */
+				updateState('','SPOT_IDC'+cls,translateName('SPOT_IDC'+cls),'number','value',value/1000,'A');
 				pointer += 40;
 		} else if (cmd === "411E00") {
-				adapter.log.debug("SPOT_PACMAX1 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PACMAX1",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PACMAX1 : " + value); */
+				updateState('','SPOT_PACMAX1',translateName('SPOT_PACMAX1'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "411F00") {
-				adapter.log.debug("SPOT_PACMAX2 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PACMAX2",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PACMAX2 : " + value); */
+				updateState('','SPOT_PACMAX2',translateName('SPOT_PACMAX2'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "412000") {
-				adapter.log.debug("SPOT_PACMAX3 : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_PACMAX3",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* adapter.log.debug("SPOT_PACMAX3 : " + value); */
+				updateState('','SPOT_PACMAX3',translateName('SPOT_PACMAX3'),'number','value',value/1000,'kW');
 				pointer += 40;
 		} else if (cmd === "451F00") {
-				adapter.log.debug("SPOT_UDC"+cls+" : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-				adapter.setState("SPOT_UDC"+cls,get32Bit(ByteOrderLong(hex.substr(pointer,8))));
+				/* dapter.log.debug("SPOT_UDC"+cls+" : " + value); */
+				updateState('','SPOT_UDC'+cls,translateName('SPOT_UDC'+cls),'number','value',value/100,'V');
 				pointer += 40;
+		} else if (cmd === "465700") {
+				updateState('','SPOT_FREQ',translateName('SPOT_FREQ'),'number','value',value/100,'Hz');
+				pointer +=40;
+		} else if (cmd === "237700") {
+				updateState('','INV_TEMP',translateName('INV_TEMP'),'number','value.temperature',value/100,'C°');
+				pointer +=40;
 		} else if (cmd === "262200") {
-			adapter.log.debug("SPOT_ETODAY : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			adapter.setState("SPOT_ETODAY",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			pointer += 16;
+				/* adapter.log.debug("SPOT_ETODAY : " + value); */
+				updateState('','SPOT_ETODAY',translateName('SPOT_ETODAY'),'number','value',value/1000,'kW');
+				pointer += 16;
 		} else if (cmd === "260100") {
-			adapter.log.debug("SPOT_ETOTAL : " + get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			adapter.setState("SPOT_ETOTAL",get32Bit(ByteOrderLong(hex.substr(pointer,8))));
-			pointer += 16;
+				/* adapter.log.debug("SPOT_ETOTAL : " + value); */
+				updateState('','SPOT_ETOTAL',translateName('SPOT_ETOTAL'),'number','value',value/1000,'kW');
+				pointer += 16;
 		} else {
 			if (pointer >= cmdLength) {
 				adapter.log.debug("End of input");
@@ -558,6 +563,14 @@ function get32Bit(hex) {
 	return parseInt(hex,16);
 }
 
+function get64Bit(hex) {
+	adapter.log.debug("get64Bit : " + hex);
+/* 	if (hex.toUpperCase() === "80000000" || hex.toUpperCase() === "FFFFFFFF") {
+		return 0;
+	} */
+	return parseInt(hex,16);
+}
+
 function decimalToHex(d, padding) {
     var hex = Number(d).toString(16);
     padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
@@ -566,4 +579,30 @@ function decimalToHex(d, padding) {
         hex = "0" + hex;
     }
     return hex;
+}
+
+/*
+Upate the state, if the state does not exist create it
+	group => prefix like (tbd later)
+	transTag => translation/description for the tag name
+	type => number/string/boolean
+	role => value/value.time/state ....
+*/
+function updateState(group,tag,transTag,type,role,value,unit) {
+	adapter.setObjectNotExists(
+		tag, {
+			type: 'state',
+			common: {
+				name: transTag,
+				type: type,
+				role: role,
+				unit: unit
+			},
+			native: {}
+		},
+		adapter.setState(
+			tag,
+			{val: value, ack: true}
+		)
+	);	
 }

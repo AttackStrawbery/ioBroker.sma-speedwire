@@ -1,0 +1,5 @@
+ip address of sma device
+on save adapter restarts with new config immediately
+password for login
+the port where the device is listening
+user name for login
