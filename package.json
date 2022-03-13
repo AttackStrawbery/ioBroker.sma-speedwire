@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sma-speedwire",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "description": "ioBroker sma-speedwire Adapter",
   "author": {
     "name": "@@Author@@",
@@ -24,17 +24,23 @@
     "type": "git",
     "url": "https://github.com/AttackStrawbery/iobroker.sma-speedwire"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@iobroker/adapter-core": "^1.0.3"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "mocha": "^4.1.0",
     "chai": "^4.1.2",
-    "dgram":"^1.0.1",
-    "binary":"^0.3.0"
+    "dgram": "^1.0.1",
+    "binary": "^0.3.0",
+    "@iobroker/testing": "^1.1.14"
   },
   "main": "sma-speedwire.js",
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "npm run test:package && npm run test:unit",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit"
   },
   "bugs": {
     "url": "https://github.com/AttackStrawbery/iobroker.sma-speedwire/issues"
